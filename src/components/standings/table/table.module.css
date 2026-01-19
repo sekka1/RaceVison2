@@ -1,0 +1,28 @@
+:root {
+  --opacity: 0.8;
+}
+
+.driverClassTable {
+  margin-bottom: 0.5rem;
+}
+
+.driverClassTable:last-child {
+  margin-bottom: 0;
+}
+
+.standingsTableWrapper {
+  background: rgba(0, 0, 0, var(--opacity));
+  padding: 0.5rem;
+}
+
+.gapRow {
+  height: 0.5rem;
+  background-color: transparent;
+  border: none;
+}
+
+.driverTableHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}

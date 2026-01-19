@@ -1,0 +1,19 @@
+{
+  "name": "race-vision",
+  "version": "0.1.33",
+  "description": "An opensource iRacing overlay solution",
+  "license": "MIT",
+  "author": {
+    "name": "Michael Pavich",
+    "url": "https://github.com/mpavich2/RaceVision"
+  },
+  "main": "./dist/main/main.js",
+  "scripts": {
+    "rebuild": "node -r ts-node/register ../../.erb/scripts/electron-rebuild.js",
+    "postinstall": "npm run rebuild && npm run link-modules",
+    "link-modules": "node -r ts-node/register ../../.erb/scripts/link-modules.ts"
+  },
+  "dependencies": {
+    "iracing-sdk-js": "^1.4.0"
+  }
+}

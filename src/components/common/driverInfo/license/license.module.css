@@ -1,0 +1,11 @@
+.licenseWrapper {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  color: black;
+  padding: 0.2rem 0.6rem;
+  gap: 0.5rem;
+  border-radius: 0.1rem;
+  font-weight: bold;
+}
