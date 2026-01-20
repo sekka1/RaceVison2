@@ -16,6 +16,49 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
+      - name: Extract version from tag
+        id: get_version
+        shell: pwsh
+        run: |
+          $tag = "${{ github.ref_name }}"
+          $version = $tag -replace '^v', ''
+          
+          # Validate semver format (just in case)
+          if ($version -notmatch '^\d+\.\d+\.\d+$') {
+            Write-Error "Invalid semver version: $version"
+            exit 1
+          }
+          
+          echo "version=$version" >> $env:GITHUB_OUTPUT
+          Write-Host "Extracted version: $version"
+
+      - name: Update package.json version
+        shell: pwsh
+        run: |
+          $version = "${{ steps.get_version.outputs.version }}"
+          $packagePath = "release/app/package.json"
+          
+          # Check if file exists
+          if (-not (Test-Path $packagePath)) {
+            Write-Error "Package.json not found at: $packagePath"
+            exit 1
+          }
+          
+          # Read and parse JSON
+          try {
+            $packageJson = Get-Content $packagePath -Raw | ConvertFrom-Json
+          } catch {
+            Write-Error "Failed to parse package.json: $_"
+            exit 1
+          }
+          
+          # Update version
+          $packageJson.version = $version
+          
+          # Write back with formatting
+          $packageJson | ConvertTo-Json -Depth 10 | Set-Content $packagePath -Encoding UTF8
+          Write-Host "Updated package.json version to: $version"
+
       - name: Setup Python
         uses: actions/setup-python@v5
         with:

@@ -80,15 +80,16 @@ Get started with RaceVision today!
   ### Creating a Release
   To create a new release of RaceVision:
   
-  1. Update the version in `release/app/package.json` following [semantic versioning](https://semver.org/)
-  2. Create and push a git tag matching the version:
+  1. Create and push a git tag with the desired version following [semantic versioning](https://semver.org/):
   ```bash
-  git tag v0.1.33
-  git push origin v0.1.33
+  git tag v1.2.3
+  git push origin v1.2.3
   ```
-  3. The GitHub Actions workflow will automatically:
+  2. The GitHub Actions workflow will automatically:
+     - Extract the version from the tag
+     - Update `release/app/package.json` with the version
      - Build the application
-     - Create a GitHub release
+     - Create a GitHub release with the tag version
      - Upload the following artifacts:
        - `RaceVision-Setup-{version}.exe` - Windows installer
        - `RaceVision-Setup-{version}.exe.blockmap` - Blockmap for efficient updates
