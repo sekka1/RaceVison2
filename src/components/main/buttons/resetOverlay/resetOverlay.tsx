@@ -2,9 +2,7 @@ import { IpcChannels } from '../../../../constants/ipcChannels';
 
 export function ResetOverlayPositionButton(props: { windowName?: string }) {
   const resetWindowPositions = () => {
-    window.electron.ipcRenderer.sendMessage(
-      IpcChannels.RESET_WINDOW_POSITIONS,
-    );
+    window.electron.ipcRenderer.sendMessage(IpcChannels.RESET_WINDOW_POSITIONS);
   };
 
   const resetSpecificWindowPosition = () => {
