@@ -182,7 +182,8 @@
     "publish": {
       "provider": "github",
       "owner": "sekka1",
-      "repo": "RaceVison2"
+      "repo": "RaceVison2",
+      "releaseType": "release"
     }
   },
   "devEngines": {
