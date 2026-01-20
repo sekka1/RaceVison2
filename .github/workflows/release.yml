@@ -33,7 +33,16 @@ jobs:
       - name: Lint
         run: npm run lint
 
-      - name: Build and package
+      - name: Build and publish to GitHub Release
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: npm run publish
+      
+      - name: Verify artifacts created
+        shell: pwsh
+        run: |
+          Write-Host "Checking for build artifacts..."
+          Get-ChildItem -Path release/build -ErrorAction SilentlyContinue | Format-Table
+          if (Test-Path release/build/*.exe) { Write-Host "✓ EXE installer found" -ForegroundColor Green } else { Write-Host "✗ EXE installer not found" -ForegroundColor Yellow }
+          if (Test-Path release/build/*.blockmap) { Write-Host "✓ Blockmap file found" -ForegroundColor Green } else { Write-Host "✗ Blockmap file not found" -ForegroundColor Yellow }
+          if (Test-Path release/build/*.yml) { Write-Host "✓ YML file found" -ForegroundColor Green } else { Write-Host "✗ YML file not found" -ForegroundColor Yellow }
