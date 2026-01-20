@@ -33,7 +33,13 @@ jobs:
       - name: Lint
         run: npm run lint
 
-      - name: Build and package
+      - name: Build and publish to GitHub Release
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: npm run publish
+      
+      - name: Verify artifacts created
+        run: |
+          ls -la release/build/*.exe
+          ls -la release/build/*.blockmap
+          ls -la release/build/*.yml

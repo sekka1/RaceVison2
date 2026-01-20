@@ -181,8 +181,8 @@
     ],
     "publish": {
       "provider": "github",
-      "owner": "mpavich2",
-      "repo": "RaceVision"
+      "owner": "sekka1",
+      "repo": "RaceVison2"
     }
   },
   "devEngines": {
