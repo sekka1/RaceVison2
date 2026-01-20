@@ -32,6 +32,11 @@ jobs:
           IRACING_BASE_URL: https://members-ng.iracing.com
         run: npm run generate-tracks
 
+      - name: Show files created/changed/deleted
+        run: |
+          echo "Files created/changed/deleted by generate-tracks:"
+          git status -s
+
       - name: Check for changes
         id: git-check
         run: |
