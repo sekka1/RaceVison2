@@ -30,7 +30,11 @@ jobs:
           IRACING_USERNAME: ${{ secrets.IRACING_USERNAME }}
           IRACING_PASSWORD: ${{ secrets.IRACING_PASSWORD }}
           IRACING_BASE_URL: https://members-ng.iracing.com
-        run: npm run generate-tracks
+        run: |
+          echo "IRACING_USERNAME=$IRACING_USERNAME" > .env
+          echo "IRACING_PASSWORD=$IRACING_PASSWORD" >> .env
+          echo "IRACING_BASE_URL=$IRACING_BASE_URL" >> .env
+          npm run generate-tracks
 
       - name: Show files created/changed/deleted
         run: |
