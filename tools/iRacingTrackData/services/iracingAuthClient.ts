@@ -43,7 +43,7 @@ export class IRacingAuthClient {
 
     const setCookieHeader = response.headers.getSetCookie();
 
-    if (!setCookieHeader) {
+    if (!setCookieHeader || setCookieHeader.length === 0) {
       throw new Error('Auth Error: Invalid Response Header');
     }
 
