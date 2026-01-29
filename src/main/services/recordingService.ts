@@ -40,16 +40,20 @@ class RecordingService {
     return true;
   }
 
-  async stop(): Promise<string | null> {
+  async stop(): Promise<{ filePath: string | null; error?: string }> {
     if (!this.isRecording) {
-      return null;
+      return { filePath: null, error: 'Not recording' };
     }
 
     this.isRecording = false;
 
     if (!this.sessionInfo || this.telemetryFrames.length === 0) {
       console.warn('No data recorded');
-      return null;
+      return {
+        filePath: null,
+        error:
+          'No data was recorded. Make sure iRacing is running before starting a recording.',
+      };
     }
 
     const result = await dialog.showSaveDialog({
@@ -60,7 +64,7 @@ class RecordingService {
 
     if (result.canceled || !result.filePath) {
       console.info('Recording save cancelled');
-      return null;
+      return { filePath: null };
     }
 
     const recording: IRecording = {
@@ -75,10 +79,10 @@ class RecordingService {
     try {
       fs.writeFileSync(result.filePath, JSON.stringify(recording, null, 2));
       console.info(`Recording saved to: ${result.filePath}`);
-      return result.filePath;
+      return { filePath: result.filePath };
     } catch (error) {
       console.error('Failed to save recording:', error);
-      return null;
+      return { filePath: null, error: 'Failed to save recording file' };
     }
   }
 

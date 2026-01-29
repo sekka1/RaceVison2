@@ -12,6 +12,7 @@ export function SettingsContent() {
   const [recordingStatus, setRecordingStatus] = useState<IRecordingStatus>({
     isRecording: false,
   });
+  const [recordingError, setRecordingError] = useState<string | null>(null);
 
   useEffect(() => {
     // Poll recording status every second
@@ -26,6 +27,7 @@ export function SettingsContent() {
   }, []);
 
   const handleStartRecording = async () => {
+    setRecordingError(null);
     await window.electron.ipcRenderer.invoke(IpcChannels.START_RECORDING);
     const status = await window.electron.ipcRenderer.invoke(
       IpcChannels.GET_RECORDING_STATUS,
@@ -34,7 +36,12 @@ export function SettingsContent() {
   };
 
   const handleStopRecording = async () => {
-    await window.electron.ipcRenderer.invoke(IpcChannels.STOP_RECORDING);
+    const result = await window.electron.ipcRenderer.invoke(
+      IpcChannels.STOP_RECORDING,
+    );
+    if (result?.error) {
+      setRecordingError(result.error);
+    }
     const status = await window.electron.ipcRenderer.invoke(
       IpcChannels.GET_RECORDING_STATUS,
     );
@@ -84,13 +91,18 @@ export function SettingsContent() {
               </button>
             </div>
           ) : (
-            <button
-              type="button"
-              className="secondaryButton"
-              onClick={handleStartRecording}
-            >
-              Start Recording
-            </button>
+            <div>
+              {recordingError && (
+                <div className={styles.recordingError}>{recordingError}</div>
+              )}
+              <button
+                type="button"
+                className="secondaryButton"
+                onClick={handleStartRecording}
+              >
+                Start Recording
+              </button>
+            </div>
           )}
         </div>
       </div>

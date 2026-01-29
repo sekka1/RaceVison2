@@ -43,3 +43,13 @@
     opacity: 0.5;
   }
 }
+
+.recordingError {
+  background-color: rgba(231, 76, 60, 0.15);
+  border: 1px solid #e74c3c;
+  border-radius: 4px;
+  padding: 0.5rem 0.75rem;
+  margin-bottom: 0.5rem;
+  color: #e74c3c;
+  font-size: 0.875rem;
+}

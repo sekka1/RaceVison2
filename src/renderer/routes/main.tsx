@@ -7,11 +7,11 @@ export default function MainApp() {
   return (
     <ContextProvider>
       <div className="mainBackground">
-        <div style={{ maxWidth: '12rem', minWidth: '12rem', flexGrow: 0 }}>
+        <div className="mainSidebar">
           <Sidebar />
         </div>
 
-        <div style={{ flexGrow: 1 }}>
+        <div className="mainContent">
           <MainContent />
         </div>
       </div>
