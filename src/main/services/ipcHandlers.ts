@@ -1,4 +1,4 @@
-import { BrowserWindow, ipcMain, nativeTheme } from 'electron';
+import { app, BrowserWindow, ipcMain, nativeTheme } from 'electron';
 import { IpcChannels } from '../../constants/ipcChannels';
 import { StoreLocations } from '../../constants/storeLocations';
 import {
@@ -53,6 +53,10 @@ export const registerIpcHandlers = (windows: WindowManager) => {
   ipcMain.handle(IpcChannels.GET_USER_SETTINGS, () => {
     const userSettings = getUserSettings();
     return userSettings;
+  });
+
+  ipcMain.handle(IpcChannels.GET_APP_VERSION, () => {
+    return app.getVersion();
   });
 
   ipcMain.on(IpcChannels.SET_IS_DRAGGABLE, (_, isDraggable) => {

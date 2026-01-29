@@ -2,6 +2,7 @@
 /* eslint-disable react/no-array-index-key */
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
+import { useEffect, useState } from 'react';
 import { BsStack } from 'react-icons/bs';
 import { RiDashboardHorizontalFill } from 'react-icons/ri';
 import { IoMdSettings } from 'react-icons/io';
@@ -11,14 +12,23 @@ import { Tab } from './navigation/tab';
 import { Accordion } from './navigation/accordion';
 import { useAppContext } from '../contextProvider';
 import { AccordionDetailLineItem } from './navigation/accordion/detailLineItem';
+import { IpcChannels } from '../../../constants/ipcChannels';
 
 export function Sidebar() {
+  const [version, setVersion] = useState<string>('');
   const {
     openNavIndex,
     setOpenNavIndex,
     openOverlayNavIndex,
     setOpenOverlayNavIndex,
   } = useAppContext();
+
+  useEffect(() => {
+    window.electron.ipcRenderer
+      .invoke(IpcChannels.GET_APP_VERSION)
+      .then((v: string) => setVersion(v))
+      .catch(() => setVersion(''));
+  }, []);
 
   const toggleNavItem = (index: number) => {
     setOpenNavIndex(index);
@@ -33,6 +43,7 @@ export function Sidebar() {
       <div style={{ width: '100%', display: 'flex', justifyContent: 'center' }}>
         <Logo />
       </div>
+      {version && <div className={styles.version}>v{version}</div>}
 
       <Tab
         isActive={openNavIndex === 0}

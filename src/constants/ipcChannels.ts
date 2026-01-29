@@ -16,4 +16,5 @@ export enum IpcChannels {
   IRACING_TELEMETRY_INFO = 'telemetryUpdate',
 
   GET_USER_SETTINGS = 'userSettings',
+  GET_APP_VERSION = 'get-app-version',
 }
