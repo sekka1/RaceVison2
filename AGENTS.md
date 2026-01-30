@@ -327,3 +327,4 @@ See [tools/iRacingTrackData/README.md](tools/iRacingTrackData/README.md) for OAu
 - Test changes with `npm run start` before building
 - When modifying authentication, refer to OAuth2 documentation
 - Track map data is pre-generated - run `generate-tracks` when tracks update
+- **After making any code changes, run `npm run lint` to ensure code quality and formatting are correct**
