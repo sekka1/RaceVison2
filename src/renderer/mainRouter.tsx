@@ -6,6 +6,7 @@ import InputGraphApp from './routes/inputGraph';
 import InputsApp from './routes/inputs';
 import FuelCalculatorApp from './routes/fuelCalculator';
 import TrackMapApp from './routes/trackMap';
+import TestOverlayApp from './routes/testOverlay';
 
 export function MainRouter() {
   return (
@@ -18,6 +19,7 @@ export function MainRouter() {
         <Route path="/inputs" element={<InputsApp />} />
         <Route path="/fuelCalculator" element={<FuelCalculatorApp />} />
         <Route path="/trackMap" element={<TrackMapApp />} />
+        <Route path="/testOverlay" element={<TestOverlayApp />} />
       </Routes>
     </HashRouter>
   );

@@ -5,6 +5,7 @@ import { InputGraphOverlayContent } from './inputGraph';
 import { RelativesOverlayContent } from './relatives';
 import { StandingsOverlayContent } from './standings';
 import { TrackMapOverlayContent } from './trackMap';
+import { TestOverlayContent } from './testOverlay';
 
 // TODO: change to list, remove hardcoded indexes
 export function OverlaysContent() {
@@ -27,6 +28,9 @@ export function OverlaysContent() {
   }
   if (openOverlayNavIndex === 5) {
     return <TrackMapOverlayContent />;
+  }
+  if (openOverlayNavIndex === 6) {
+    return <TestOverlayContent />;
   }
   return null;
 }

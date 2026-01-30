@@ -94,6 +94,11 @@ export function Sidebar() {
               onClick={() => overlayNavClicked(5)}
               title="Track Map"
             />
+            <AccordionDetailLineItem
+              isActive={openOverlayNavIndex === 6}
+              onClick={() => overlayNavClicked(6)}
+              title="Test Overlay"
+            />
           </div>
         )}
       </Accordion>
